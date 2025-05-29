@@ -3,3 +3,5 @@ openai
 streamlit
 pymilvus
 ipykernel
+pandas
+matplotlib
