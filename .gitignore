@@ -26,3 +26,6 @@ venv/
 # data directory
 /data/*
 !/data/.gitkeep
+
+# vectorstore
+*.db
