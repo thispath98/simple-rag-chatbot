@@ -5,3 +5,4 @@ pymilvus
 ipykernel
 pandas
 matplotlib
+pyyaml
