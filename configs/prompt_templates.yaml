@@ -1,0 +1,16 @@
+default_prompt: |
+  You are a helpful assistant.
+  
+  Question: {{ question }}
+  
+  Answer:
+
+summarization_prompt: |
+  Please summarize the following content:
+
+  {{ content }}
+
+classification_prompt: |
+  Classify the following sentence into one of the categories: {{ categories }}
+
+  Sentence: {{ sentence }}
