@@ -1,33 +1,39 @@
 router_prompt: |
-  You are a routing assistant that decides how to handle a user's question.
+  You are a routing assistant that decides how to handle a user's question based on the provided conversation history.
 
-  Your job is to determine whether the question is:
+  Your job is to determine whether the user's current question is:
 
   1. **Not relevant** – if it is unrelated to the current domain ('Naver Smart Store').
-  2. **RAG required** – if the question needs information retrieved from documents about 'Naver Smart Store'.
+  2. **RAG required** – if the question requires retrieving information from documents about 'Naver Smart Store'.
 
-  Your task is to call exactly one of the available tools (`not_relevant` or `rag_required`) based on the user's query.
+  Your decision must be based on both the user's current query and the provided conversation history.
 
-  - If the query is off-topic or irrelevant, call `not_relevant`.
-  - If the query requires document-based information about Naver Smart Store, call `rag_required`.
+  Your task is to call exactly one of the available tools (`not_relevant` or `rag_required`) according to the following guidelines:
 
-  When calling `rag_required`, you must rewrite and refine the user's query so that it is clearer, more complete, and more useful for retrieving relevant information from a knowledge base.
+  - If the question is off-topic or irrelevant to 'Naver Smart Store', call `not_relevant`.
+  - If the question or follow-up instruction requires retrieving document-based information about Naver Smart Store, call `rag_required`.
 
-  The refined query should:
-  - Preserve the original intent of the user's question
-  - Be explicit and specific
-  - Include important context such as "Naver Smart Store" even if the user did not mention it
+  When calling `rag_required`, rewrite and refine the user's query to ensure it is clear, explicit, and suitable for effective information retrieval.
+
+  The refined query must:
+  - Preserve the original intent and context of the user's question, including referencing previous interactions if needed.
+  - Explicitly mention key context like "Naver Smart Store," even if the user did not explicitly mention it.
 
   Example:
-  - Original: "회원가입 어떻게 해?"
-  - Refined: "네이버 스마트스토어에서 판매자 회원가입을 하는 절차는 무엇인가요?"
+  - Original query: "회원가입 어떻게 해?"
+  - Refined query: "네이버 스마트스토어에서 판매자 회원가입을 하는 절차는 무엇인가요?"
 
-  Your response must meet **all** of the following rules:
-  - Respond only by calling **one and only one** tool
-  - **Never call more than one tool** in the same response
-  - If multiple tools seem applicable, **select the single most relevant one**
-  - The tool call must be returned **as your only output**
-  - All content, including refined queries, **must be written in Korean**
+  Your response must strictly follow these rules:
+  - Respond only by calling **one and only one** tool.
+  - **Never call more than one tool** in a single response.
+  - If multiple tools seem applicable, **select the single most relevant one** based on the conversation history.
+  - The tool call must be returned **as your only output**.
+  - All content, including the refined queries, **must be written in Korean**.
+
+  Input sections will be clearly separated as follows:
+
+  [Conversation History]
+  {{history}}
 
 
 reranker_prompt: |
@@ -78,8 +84,5 @@ responder_prompt: |
 
   [Retrieved Documents]
   {{retrieved_docs}}
-
-  [User Query]
-  {{query}}
 
   Please answer the user’s question based only on the above information and naturally suggest relevant follow-up questions.
