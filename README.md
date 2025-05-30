@@ -79,14 +79,15 @@ streamlit run main.py
 
 ```
 .
-├── EDA.ipynb           # FAQ 데이터 분석 및 전처리
-├── main.py             # 메인 애플리케이션
+├── .env                      # API 키 등 환경 변수
+├── EDA.ipynb                 # FAQ 데이터 분석 및 전처리
+├── main.py                   # Streamlit 기반 챗 인터페이스
 ├── utils/
-│   ├── chat_util.py    # 채팅 관련 유틸리티
-│   ├── llms.py         # LLM 에이전트 구현
-│   └── vectorstore_util.py  # 벡터 스토어 관련 유틸리티
+│   ├── chat_util.py          # 채팅 관련 유틸리티
+│   ├── llms.py               # LLM 에이전트 클래스 정의
+│   └── vectorstore_util.py   # 벡터 스토어 관련 유틸리티
 ├── configs/
-│   └── prompt_templates.yaml  # 프롬프트 템플릿
+│   └── prompt_templates.yaml # 각 에이전트의 프롬프트 템플릿
 └── data/
-    └── final_result.pkl  # FAQ 데이터
+    └── final_result.pkl      # FAQ 데이터
 ```
