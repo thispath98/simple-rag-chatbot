@@ -7,6 +7,7 @@
 - **Retrieval-Augmented Geration (RAG) 기반 답변**: 관련 문서 검색 및 활용을 통한 정확한 답변 생성
 - **멀티턴 대화**: 이전 대화 맥락을 고려한 자연스러운 대화 가능
 - **라우팅**: 질문의 성격에 따라 적절한 응답 방식 결정
+- **쿼리 정제**: 사용자 질문을 FAQ 검색에 최적화된 형태로 변환
 - **문서 리랭킹**: 검색된 문서의 관련성 검증 및 순위화
 - **맥락 기반 응답**: 검색된 문서와 대화 맥락을 고려한 답변 생성
 
@@ -16,7 +17,7 @@
 
 1. **Router Agent**
    - `Function calling`을 통한 질문 분석
-   - `RAG` 필요 여부 판단
+   - `RAG` 필요 여부 판단, 필요 시 유저의 쿼리 정제
    - 적절한 처리 방식 결정
 
 2. **Reranker Agent**
@@ -78,10 +79,11 @@ streamlit run main.py
 
 ```
 .
-├── main.py              # 메인 애플리케이션
+├── EDA.ipynb           # FAQ 데이터 분석 및 전처리
+├── main.py             # 메인 애플리케이션
 ├── utils/
-│   ├── chat_util.py     # 채팅 관련 유틸리티
-│   ├── llms.py          # LLM 에이전트 구현
+│   ├── chat_util.py    # 채팅 관련 유틸리티
+│   ├── llms.py         # LLM 에이전트 구현
 │   └── vectorstore_util.py  # 벡터 스토어 관련 유틸리티
 ├── configs/
 │   └── prompt_templates.yaml  # 프롬프트 템플릿
